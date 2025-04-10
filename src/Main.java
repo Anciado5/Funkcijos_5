@@ -31,8 +31,7 @@ public class Main {
         System.out.println(intRandom(8, 26));
 
         System.out.println("\n6 uzduotis =======================================");
-        int[] sugeneruotasMasyvas = intRabdomMasyvas(5,20, 5);
-        System.out.println(sugeneruotasMasyvas);
+        int[] sugeneruotasMasyvas = intRandomMasyvas(5,20, 5);
         printMasyvas(sugeneruotasMasyvas);
 
         System.out.println("\n7 uzduotis =======================================");
@@ -44,11 +43,38 @@ public class Main {
         System.out.println("\n9 uzduotis =======================================");
         spausdinkStaciakampi(12,15);
 
-        System.out.println("\n10 uzduotis =======================================");
-
-
+        System.out.println("\n\n10 uzduotis =======================================");
+        String sakinys = "Šiandien labai graži diena";
+        raidesTarpai(sakinys);
 
         System.out.println("\n11 uzduotis =======================================");
+        String vardas = "Naglis";
+        System.out.println(uzkoduotasSakinys(vardas));
+
+        System.out.println("\n==================SUNKESNI===========================");
+        System.out.println("\n1 uzduotis =================================");
+        String text = "labas";
+        labas(text);
+
+        System.out.println("\n2 uzduotis =================================");
+        printRndString(generateRndStr(10));
+
+        System.out.println("\n3 uzduotis =================================");
+        int pradinisSkaicius = 3000;
+        int sveikiSkaiciai = countSveikiSkaiciai(pradinisSkaicius);
+        System.out.println("Skaicius " + pradinisSkaicius + " be liekanos dalijasi is " + sveikiSkaiciai + " sveiku skaiciu (isskyrus vieneta ir pati save).");
+
+        System.out.println("\n4 uzduotis =================================");
+        int[] sortedArray = randomMasyvas100();
+        printMasyvas(sortedArray);
+
+        System.out.println("\n5 uzduotis =================================");
+
+        System.out.println("\n6 uzduotis =================================");
+
+        System.out.println("\n7 uzduotis =================================");
+
+
 
 
     }
@@ -78,7 +104,7 @@ public class Main {
         return random;
     }
 //==============6 uzduotis==================================
-    public static int[] intRabdomMasyvas(int min, int max, int lenght){
+    public static int[] intRandomMasyvas(int min, int max, int lenght){
         int[] naujasMasyvas = new int[lenght];
         for (int i = 0; i < lenght; i++) {
             int random1 = intRandom(min,max);
@@ -109,11 +135,77 @@ public class Main {
         }
     }
 //===================10 uzduotis====================================
-    public static void raidesTarpai(String aaa){
-        String sakinys = "Šiandien labai graži diena";
-        String replaceSakinys = sakinys.replaceAll(" ", "0");
-        System.out.println(replaceSakinys);
+    public static void raidesTarpai(String sakinys){
+        System.out.println("Sakinyje yra " + sakinys.length() + " simboliai:");
+        String replaceSakinys = sakinys.replace(" ", "");
+        System.out.println(replaceSakinys.length() + " raides");
+        int tarpuSkaicius = sakinys.length() - replaceSakinys.length();
+        System.out.println(tarpuSkaicius + " tarpai");
     }
+//=================11 uzdavinys=================================
+    public static String uzkoduotasSakinys(String vardas){
+        String reverseVardas = "";
+        for (int i = vardas.length() - 1; i >= 0; i--) {
+            reverseVardas = reverseVardas + vardas.charAt(i);
+        }
+        return reverseVardas;
+    }
+//    =====================SUNKESNI===========================================
+//    ========================================================================
+
+//    =====================1 uzdavinys========================================
+    public static void labas(String text){
+        System.out.println("---" + text + "---");
+    }
+//    =====================2 uzdavinys========================================
+    public static String generateRndStr(int length) {
+        String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String text1 = "";
+        for (int i = 0; i < length; i++) {
+            text1 += symbols.charAt((int) (Math.random()*symbols.length()));
+        }
+        return text1;
+    }
+    public static void printRndString(String text1){
+        String numbers = "";
+        System.out.println(text1);
+        for (int i = 0; i < text1.length(); i++) {
+            String simbolis = "" + text1.charAt(i);
+            if (simbolis.matches("[0-9]")) {
+//                System.out.println("[" + simbolis + "]");
+                numbers += text1.charAt(i);
+            } else {
+                if(numbers.length() > 3){
+                    System.out.println("[" + simbolis + "]");
+                    numbers = "";
+                }
+                System.out.println(simbolis);
+            }
+        }
+    }
+//    =====================3 uzdavinys========================================
+    public static int countSveikiSkaiciai(int argumentas){
+        int svSk = 0;
+        for (int i = 2; i < argumentas - 1; i++) {
+            if (argumentas % i == 0){
+                svSk++;
+                //System.out.println(i);
+            }
+        }
+        return svSk;
+    }
+//    =====================4 uzdavinys========================================
+    public static int[] randomMasyvas100(){
+        int[] naujasMasyvas = intRandomMasyvas(33,77,100);
+        for (int i = 0; i < naujasMasyvas.length; i++) {
+            int dalikliuKiekis = countSveikiSkaiciai(naujasMasyvas[i]);
+        }
+        return naujasMasyvas;
+    }
+
+
+
+
 
 
 
